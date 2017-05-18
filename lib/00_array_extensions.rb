@@ -153,6 +153,11 @@ end
 
 class Array
   def my_transpose
+    array = []
+    (0...self.length).each do |i|
+      array << self.map { |row| row[i]}
+    end
+    return array
   end
 end
 
