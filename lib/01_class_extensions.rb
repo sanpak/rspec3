@@ -131,9 +131,18 @@ class Fixnum
     while base ** last_power < self
       last_power += 1
     end
-    (0...last_power).each do |power|
-      digit_array << (self / (base ** power) % base).to_s
+    #Am I repeating myself here?
+    #10.stringigy(10) is an edge case in here
+    if base == self
+      (0..last_power).each do |power|
+        digit_array << (self / (base ** power) % base).to_s
+      end
+    else
+      (0...last_power).each do |power|
+        digit_array << (self / (base ** power) % base).to_s
+      end
     end
+
     if base == 16
       digit_array.each_with_index do |el,idx|
         digit_array[idx] = hash[el.to_i] if el.to_i > 9
