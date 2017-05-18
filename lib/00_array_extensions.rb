@@ -92,6 +92,15 @@ end
 
 class Array
   def median
+    return nil if self.empty?
+    self.sort!
+    if self.length % 2 > 0
+      return self[self.length / 2]
+    else
+      middle_right = self.length / 2
+      middle_left = middle_right - 1
+      return (self[middle_right] + self[middle_left]) / 2.0
+    end
   end
 end
 
