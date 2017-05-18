@@ -52,7 +52,7 @@ class Hash
       new_hash[key] = value unless other_hash.include?(key)
     end
     other_hash.each do |key,value|
-      new_hash[key] = value unless new_hash.include?(key)
+      new_hash[key] = value unless self.include?(key)
     end
     return new_hash
   end
@@ -117,6 +117,30 @@ end
 
 class Fixnum
   def stringify(base)
+    digit_array = []
+    last_power = 1
+
+    idx = 0
+    array = ("a".."f").to_a
+    hash = Hash.new
+    (10..15).each do |num|
+      hash[num] = array[idx]
+      idx += 1
+    end
+
+    while base ** last_power < self
+      last_power += 1
+    end
+    (0...last_power).each do |power|
+      digit_array << (self / (base ** power) % base).to_s
+    end
+    if base == 16
+      digit_array.each_with_index do |el,idx|
+        digit_array[idx] = hash[el.to_i] if el.to_i > 9
+      end
+    end
+    return digit_array.reverse.join
+
   end
 end
 
