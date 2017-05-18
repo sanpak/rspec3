@@ -18,6 +18,17 @@
 
 class String
   def caesar(shift)
+    new_string = ""
+    wrap_around = shift % 26
+    self.each_char do |letter|
+      shift_character = letter.ord + wrap_around
+      if shift_character > 122
+        new_string << (96 + (shift_character - 122)).chr
+      else
+        new_string << shift_character.chr
+      end
+    end
+    return new_string
   end
 end
 
@@ -36,6 +47,14 @@ end
 
 class Hash
   def difference(other_hash)
+    new_hash = Hash.new
+    self.each do |key,value|
+      new_hash[key] = value unless other_hash.include?(key)
+    end
+    other_hash.each do |key,value|
+      new_hash[key] = value unless new_hash.include?(key)
+    end
+    return new_hash
   end
 end
 
