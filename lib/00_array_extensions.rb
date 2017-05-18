@@ -73,6 +73,13 @@ end
 
 class Array
   def two_sum
+    array = []
+    (0...self.length).each do |idx1|
+      (idx1+1...self.length).each do |idx2|
+        array << [idx1,idx2] if (self[idx1] + self[idx2]) == 0
+      end
+    end
+    return array
   end
 end
 
