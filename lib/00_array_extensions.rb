@@ -5,6 +5,11 @@
 
 class Array
   def sum
+    if self.empty?
+      return 0
+    else
+      self.inject(:+)
+    end
   end
 end
 
@@ -16,9 +21,15 @@ end
 
 class Array
   def square!
+    (0...self.length).each do |idx|
+      self[idx] = self[idx] ** 2
+    end
   end
 
   def square
+    array = []
+    array = self.dup
+    array.map { |num| num * num }
   end
 end
 
@@ -36,6 +47,11 @@ end
 
 class Array
   def my_uniq
+    array = []
+    (0...self.length).each do |idx|
+      array << self[idx] unless array.include?(self[idx])
+    end
+    return array
   end
 end
 
